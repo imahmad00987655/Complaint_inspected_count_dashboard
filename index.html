@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Complaint Status Dashboard</title>
+        <link rel="icon" type="image/x-icon" href="icons8-favicon-94.png">
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style2.css">
+
+        <!-- Daterangepicker CSS -->
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+        <!-- Highcharts -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script
+            src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script
+            src="https://code.highcharts.com/modules/accessibility.js"></script>
+    </head>
+    <body>
+
+        <button id="navigate-button" class="btn-custom">Data-Table</button>
+
+
+        <div id="filterSummary">
+            <span>Filter Summary:</span> Example filter applied
+        </div>
+
+
+        <!-- Main Container -->
+        <div class="container dashboard-container">
+            <!-- Header -->
+            <div class="header">
+                <h1>Complaint Inspected Count</h1>
+            </div>
+            <!-- Filter Section -->
+            <div class="filters">
+                <div>
+                    <h2>Year/Month</h2>
+                    <!-- Year/Month Dropdown with Checkboxes -->
+                    <div class="dropdown">
+
+                        <button class="btn btn-secondary dropdown-toggle"
+                            type="button" id="yearMonthDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Select Year/Month
+                        </button>
+
+
+                        <div class="button-container">
+                            <button class="button">Yesterday</button>
+                            <button class="button1">-7Day's</button>
+                            
+                        </div>
+
+                        <ul class="dropdown-menu" id="yearMonthCheckboxes"
+                            aria-labelledby="yearMonthDropdown">
+                            <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h2>Select Dates Range</h2>
+                    <!-- Date Range Picker -->
+                    <input type="text" name="datefilter" class="form-control"
+                        placeholder="Select Date Range" />
+                </div>
+            </div>
+
+            <!-- Total Count -->
+            <div class="total-count" id="totalCount">
+                <h5><b>Total Count</b></h5>
+                0
+            </div>
+            
+
+            <!-- Charts Grid -->
+            <div class="chart-grid">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 chart-container">
+                        <div id="claimProcessedChart" class="chart"> claimProcessedChart</div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 chart-container">
+                        <div id="name1Chart" class="chart"> name1Chart</div>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 chart-container">
+                        <div id="zonesChart" class="chart">Zones Chart</div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 chart-container">
+                        <div id="brandNameChart" class="chart">Brand Name
+                            Chart</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 chart-container">
+                        <div id="usedPeriodChart" class="chart">Used Period
+                            Chart</div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 chart-container">
+                        <div id="equalQualityChart" class="chart">Equal Quality
+                            Chart</div>
+                    </div>
+                </div>
+                              
+                <div class="row">
+                    <div class="col-12 chart-container">
+                        <div id="cityChart" class="chart">City Chart</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- Custom JavaScript -->
+        <script src="script.js"></script>
+        <script src="script2.js"></script>
+        
+
+        <!-- Bootstrap Bundle JS -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </body>
+
+</html>

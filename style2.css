@@ -1,0 +1,19 @@
+.btn-custom {
+    position: absolute; /* Position button absolutely */
+    top: 20px; /* Distance from top */
+    right: 20px; /* Distance from right */
+    background-color: #007bff; /* Blue background */
+    color: white;
+    border: 1px solid #007bff; /* Blue border */
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #004080; /* Darker blue border on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
+}

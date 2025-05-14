@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Center Report DataTable</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #ccd9e7;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #FFFFC5;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        th:hover {
+            background-color: #0056b3;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dataTables_wrapper {
+            margin-top: 20px;
+        }
+
+        .search-container {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .search-input {
+            margin-right: 5px;
+            width: auto;
+            padding: 6px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .btn-import {
+            margin: 10px 0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Complaint Inspected Count</h1>
+
+    <div class="search-container">
+        <label for="date-filter">Select Date: </label>
+        <input type="date" id="date-filter" class="search-input" />
+        <button id="export-excel" class="btn btn-success">Export to Excel</button>
+
+        <input type="file" id="csv-file-input" accept=".csv" style="display:none;" />
+    </div>
+
+    <div class="table-container">
+        <table id="reportTable" class="table table-striped table-bordered display">
+            <thead>
+                <tr>
+                    <th>Cmp No</th>
+                    <th>Inspected Date</th>
+                    <th>Used Period</th>
+                    <th>Brand Name</th>
+                    <th>Zones</th>
+                    <th>Equal Quality</th>
+                    <th>City</th>
+                    <th>Current Status</th>
+                    <th>Name1</th>
+                    <th>claim_Processed_Or_Not</th>
+                </tr>
+                <tr class="filter-row">
+                    <th><input type="text" placeholder="Search" class="search-input" /></th>
+                    <th><input type="text" placeholder="Search" class="search-input" /></th>
+                    <th><input type="text" placeholder="Search" class="search-input" /></th>
+                    <th><input type="text" placeholder="Search" class="search-input" /></th>
+                    <th><input type="text" placeholder="Search" class="search-input" /></th>
+                    <th><input type="text" placeholder="Search" class="search-input" /></th>
+                    <th><input type="text" placeholder="Search" class="search-input" /></th>
+                    <th><input type="text" placeholder="Search" class="search-input" /></th>
+                    <th><input type="text" placeholder="Search" class="search-input" /></th>
+                    <th><input type="text" placeholder="Search" class="search-input" /></th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Data will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const table = $('#reportTable').DataTable({
+                ajax: {
+                    url: 'http://192.168.1.209:5055/callcenterreportdata',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'cmpNo' },
+                    { data: 'inspectedDate' },
+                    { data: 'usedPeriod' },
+                    { data: 'brandName' },
+                    { data: 'zones' },
+                    { data: 'equalQuality' },
+                    { data: 'city' },
+                    { data: 'currentStatus' },
+                    { data: 'name1' },
+                    { data: 'claim_Processed_Or_Not' },
+                ],
+                paging: true,
+                searching: true,
+                responsive: true,
+                initComplete: function () {
+                    // Add individual search inputs for each column
+                    this.api().columns().every(function () {
+                        const column = this;
+                        const input = $('<input type="text" placeholder="Search" class="search-input" />')
+                            .appendTo($(column.header()).empty())
+                            .on('keyup change clear', function () {
+                                if (column.search() !== this.value) {
+                                    column.search(this.value).draw();
+                                }
+                            });
+                    });
+                }
+            });
+
+            // Date filter
+            $('#date-filter').on('change', function () {
+                const selectedDate = $(this).val();
+                if (selectedDate) {
+                    // Format the date from YYYY-MM-DD to DD-MM-YYYY
+                    const parts = selectedDate.split('-');
+                    const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`; // Convert to DD-MM-YYYY
+                    table.columns(1).search(formattedDate).draw();
+                } else {
+                    table.columns(1).search('').draw();
+                }
+            });
+
+            // Export to Excel
+            $('#export-excel').on('click', function () {
+                const wb = XLSX.utils.book_new(); // Create a new workbook
+                const data = table.rows({ search: 'applied' }).data().toArray(); // Get filtered data
+
+                // Map data to include only relevant fields
+                const formattedData = data.map(row => ({
+                    "Cmp No": row.cmpNo,
+                    "Inspected Date": row.inspectedDate,
+                    "Used Period": row.usedPeriod,
+                    "Brand Name": row.brandName,
+                    "Zones": row.zones,
+                    "Equal Quality": row.equalQuality,
+                    "City": row.city,
+                    "Current Status": row.currentStatus,
+                    "Name1": row.name1,
+                    "Claim Processed Or Not": row.claim_Processed_Or_Not,
+                }));
+
+                const ws = XLSX.utils.json_to_sheet(formattedData); // Convert formatted data to worksheet
+                XLSX.utils.book_append_sheet(wb, ws, 'Report Data'); // Append worksheet to workbook
+
+                // Generate Excel file and trigger download
+                XLSX.writeFile(wb, 'CallCenterReport.xlsx');
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

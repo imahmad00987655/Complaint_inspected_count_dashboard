@@ -1,0 +1,294 @@
+/* Custom Styles for Dashboard */
+
+body {
+    background-color: #008080; /* Windows XP Teal background */
+    font-family: Tahoma, sans-serif; /* Windows XP font */
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-container {
+    padding: 20px;
+    background-color: #c0c0c0; /* Windows XP grey background */
+    border: 2px solid #000080; /* Windows XP blue border */
+    border-radius: 10px; /* Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    max-width: 1500px;
+    margin: 50px auto;
+    outline: none;
+    transition: box-shadow 0.3s ease, border-radius 0.3s ease;
+}
+
+.dashboard-container:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+    border-radius: 15px; /* Enhance rounded corners on hover */
+}
+
+.header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 36px; /* Larger font size */
+    font-weight: bold; /* Bold font weight */
+    color: #000080; /* Windows XP blue text */
+    transition: color 0.3s ease;
+}
+
+.header h1:hover {
+    color: #000060; /* Darker blue on hover */
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.filters div {
+    width: 48%;
+}
+
+.filters h2 {
+    font-size: 20px; /* Larger font size */
+    font-weight: bold; /* Bold font weight */
+    color: #000080; /* Windows XP blue text */
+    text-align: left;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #000080; /* Thicker Windows XP blue border */
+    transition: border-color 0.3s ease;
+}
+
+.filters h2:hover {
+    border-color: #000060; /* Darker blue on hover */
+}
+
+.dropdown-menu {
+    max-height: 200px;
+    overflow-y: auto;
+    width: 250px;
+    padding: 10px;
+    border: 2px solid #000080; /* Windows XP blue border */
+    background-color: #c0c0c0; /* Windows XP grey background */
+    border-radius: 10px; /* Add rounded corners */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dropdown-menu:hover {
+    border-color: #000060; /* Darker blue on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+}
+
+.dropdown-menu .form-check {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-menu .form-check-input {
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px; /* Add rounded corners */
+    background-color: #ffffff;
+    border: 2px solid #000080; /* Windows XP blue border */
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.dropdown-menu .form-check-input:checked {
+    background-color: #000080; /* Windows XP blue background */
+    border-color: #000080; /* Windows XP blue border */
+}
+
+.dropdown-menu .form-check-input:checked::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    clip-path: polygon(0 0, 100% 100%, 100% 0, 0 100%);
+}
+
+.dropdown-menu .form-check-label {
+    font-size: 14px;
+    color: #333;
+}
+
+.dropdown-menu li:hover {
+    background-color: #e9ecef;
+}
+
+.btn-secondary {
+    background-color: #000080; /* Windows XP blue background */
+    border-color: #000080; /* Windows XP blue border */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #000060; /* Darker blue on hover */
+    border-color: #000040; /* Darker blue border on hover */
+}
+
+.total-count {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    background-color: #800000;
+    padding: 5px;
+    border-radius: 10px; /* Add rounded corners */
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+.total-count:hover {
+    background-color: #600000; /* Darker red on hover */
+    border-radius: 15px; /* Enhance rounded corners on hover */
+}
+
+.dash {
+    border: 2px solid red;
+    width: 400px;
+    height: 0;
+    position: absolute;
+    top: 40%;
+    left: 56px;
+    transform: translateY(-50%);
+}
+
+.text {
+    position: absolute;
+    top: 55%;
+    left: 100px;
+    transform: translateY(-50%);
+    font-size: 50px;
+    color: black;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+.chart-container {
+    margin-bottom: 30px;
+    height: 350px;
+}
+
+.chart {
+    width: 100%;
+    height: 100%;
+    background-color: #c0c0c0; /* Windows XP grey background */
+    border: 2px solid #000080; /* Windows XP blue border */
+    border-radius: 10px; /* Add rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart:hover {
+    border-color: #000060; /* Darker blue on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+}
+
+.highcharts-credits {
+    display: none !important;
+}
+
+input[name="datefilter"] {
+    width: 100%;
+    height: 38px;
+    padding: 5px;
+    border: 2px solid #000080; /* Windows XP blue border */
+    border-radius: 5px; /* Add rounded corners */
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[name="datefilter"]:focus {
+    border-color: #000060; /* Darker blue on focus */
+    box-shadow: 0 0 5px rgba(0, 0, 128, 0.5); /* Blue shadow */
+    outline: none;
+}
+
+.button-container {
+    display: flex;
+    gap: 5px;
+}
+
+.button {
+    width: 180px;
+    height: 38px;
+    background-color: #000080; /* Windows XP blue background */
+    color: white;
+    border: 2px solid #000080; /* Windows XP blue border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, border-radius 0.3s;
+    margin-left: 185px;
+    margin-top: -38px;
+}
+
+.button1 {
+    width: 180px;
+    height: 38px;
+    background-color: #000080; /* Windows XP blue background */
+    color: white;
+    border: 2px solid #000080; /* Windows XP blue border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, border-radius 0.3s;
+    margin-left: 10px;
+    margin-top: -38px;
+}
+
+.button:hover {
+    background-color: #000060; /* Darker blue on hover */
+    border-radius: 10px; /* Enhance rounded corners on hover */
+}
+
+#filterSummary {
+    font-family: Tahoma, sans-serif; /* Windows XP font */
+    font-size: 14px;
+    color: #333;
+    background-color: #c0c0c0; /* Windows XP grey background */
+    border: 2px solid #000080; /* Windows XP blue border */
+    border-radius: 10px; /* Add rounded corners */
+    padding: 8px 16px;
+    margin: 12px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    cursor: move;
+    width: 250px;
+    height: 80px;
+    max-width: 100%;
+    overflow: hidden;
+    user-select: none;
+    transition: box-shadow 0.3s ease, border-radius 0.3s ease;
+}
+
+#filterSummary:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+    border-radius: 15px; /* Enhance rounded corners on hover */
+}
+
+#filterSummary::before {
+    content: '🔍 ';
+    font-size: 16px;
+    color: #666;
+}
+
+#filterSummary span {
+    font-weight: bold;
+    color: #555;
+}
